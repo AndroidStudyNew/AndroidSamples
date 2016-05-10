@@ -17,6 +17,7 @@ public class BaseAppCompatActivity extends AppCompatActivity {
         setContentView(R.layout.activity_base);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -35,8 +36,9 @@ public class BaseAppCompatActivity extends AppCompatActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        if (id == R.id.home) {
+        if (id == android.R.id.home) {
             onBackPressed();
+            return true;
         }
 
         return super.onOptionsItemSelected(item);
