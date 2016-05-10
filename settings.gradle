@@ -1,1 +1,5 @@
-include ':MessagingService', ':applibs'
+include ':MessagingService'
+include ':applibs'
+include ':bluetooth'
+include ':customviewdemo'
+include ':permission'
