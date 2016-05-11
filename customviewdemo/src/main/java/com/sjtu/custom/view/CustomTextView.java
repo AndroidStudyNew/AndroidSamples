@@ -220,8 +220,4 @@ public class CustomTextView extends View {
         return mTextToList;
     }
 
-    private int maxTextSize(int mTextSizePinyin, int mTextSizeHanzi) {
-        return mTextSizeHanzi > mTextSizePinyin ? mTextSizeHanzi : mTextSizePinyin;
-    }
-
 }
