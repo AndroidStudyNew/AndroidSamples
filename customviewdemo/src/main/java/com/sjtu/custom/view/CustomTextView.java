@@ -20,15 +20,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * 自定义View步骤：(学习网址参考：http://blog.csdn.net/lmj623565791/article/details/24252901)
- * 1、自定义View的属性，首先在res/values/  下建立一个attrs.xml ， 在里面定义我们的属性和声明我们的整个样式。
- * 2、在View的构造方法中获得我们自定义的属性
- * [ 3、重写onMesure ]
- *  4、重写onDraw
- * 我把3用[]标出了，所以说3不一定是必须的，当然了大部分情况下还是需要重写的。
  *
- *
- * Created by CharlesZhu on 2016/4/22.
+ * Created by CharlesZhu on 2016/5/11.
  */
 public class CustomTextView extends View {
 
@@ -36,13 +29,10 @@ public class CustomTextView extends View {
     private static final String TAG = "CustomTextView";
     private String mText;
 
-    private String mTextContent;
     private int mTextColor;
     private int mTextSize;
 
-    private String mSpellContent;
     private int mTextSpellColor;
-    private int mTextSpellSize;
 
     /**
      * 绘制时控制文本绘制的范围
@@ -98,11 +88,6 @@ public class CustomTextView extends View {
                     mTextSize = a.getDimensionPixelSize(attr,(int) TypedValue.applyDimension(
                             TypedValue.COMPLEX_UNIT_SP, 16, getResources().getDisplayMetrics()));
                     break;
-                case R.styleable.CustomTextView_ctextSpellSize:
-                    // 默认设置为16sp，TypeValue也可以把sp转化为px
-                    mTextSpellSize = a.getDimensionPixelSize(attr,(int) TypedValue.applyDimension(
-                            TypedValue.COMPLEX_UNIT_SP, 16, getResources().getDisplayMetrics()));
-                    break;
                 case R.styleable.CustomTextView_ctextLinePadding:
                     mLinePadding = a.getDimensionPixelSize(attr,(int) TypedValue.applyDimension(
                             TypedValue.COMPLEX_UNIT_DIP, 8, getResources().getDisplayMetrics()));
@@ -111,7 +96,7 @@ public class CustomTextView extends View {
         }
         a.recycle();
 
-        Log.e(TAG,"mTextSize:" + mTextSize + ", mTextSpellSize:" + mTextSpellSize + "  mLinePadding:" + mLinePadding);
+        Log.e(TAG,"mTextSize:" + mTextSize + ", mTextSize:" + mTextSize + "  mLinePadding:" + mLinePadding);
         /**
          * 获取绘制文本的宽高
          */
@@ -126,17 +111,6 @@ public class CustomTextView extends View {
         invalidate();
     }
 
-    /**
-     * onMesure若调用系统提供的，系统帮我们测量的结果就是MATCH_PARENT的长度
-     * 因此当设置了WRAP_CONTENT/MATCH_PARENT时，我们需要自己进行测量，即重写onMesure方法”：
-     * 重写之前先了解MeasureSpec的specMode,一共三种类型：
-     * EXACTLY：一般是设置了明确的值或者是MATCH_PARENT
-     * AT_MOST：表示子布局限制在一个最大值内，一般为WARP_CONTENT
-     * UNSPECIFIED：表示子布局想要多大就多大，很少使用
-     *
-     * @param widthMeasureSpec
-     * @param heightMeasureSpec
-     */
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         Log.e(TAG,"onMeasure");
@@ -145,16 +119,14 @@ public class CustomTextView extends View {
         mPaint.getTextBounds("测试",0,"测试".length(),mBound);
         mPaint.setColor(mTextColor);
 
-        mSpellPaint.setTextSize(mTextSpellSize);
+        mSpellPaint.setTextSize(mTextSize);
         mSpellPaint.getTextBounds("ceshi",0,"ceshi".length(),mSpellBound);
         mSpellPaint.setColor(mTextSpellColor);
 
         int widthSize = MeasureSpec.getSize(widthMeasureSpec);
         mLineHeight = getPaddingTop() + mBound.height() + mSpellBound.height() + getPaddingBottom() + mLinePadding;
-        Log.e(TAG,"onMeasure mLineHeight:" + mLineHeight);
         int width = getPaddingLeft() + widthSize + getPaddingRight();
         int height =getPaddingTop() +  drawReal(mSpellPaint,mPaint,width,null) + getPaddingBottom() + 2 * mLinePadding;
-        Log.e(TAG,"onMeasure--width--" +  width + "--height--" + height + ",mLineHeight:" + mLineHeight);
         setMeasuredDimension(width,height);
     }
 
@@ -164,6 +136,7 @@ public class CustomTextView extends View {
         Log.e(TAG,"onDraw");
         drawReal(mSpellPaint,mPaint,getWidth(),canvas);
     }
+
     private int drawReal(Paint spellPaint, Paint paint, int widthSize, Canvas canvas) {
         if (initTextToList == null || initTextToList.size() == 0) {
             return 0;
@@ -192,7 +165,6 @@ public class CustomTextView extends View {
                 width = width_pinyin;
                 startX_pinyin = templinelength;
                 startX_hanzi = startX_pinyin + (width_pinyin - width_hanzi) / 2;
-
             }
             templinelength += width;
             if (templinelength > widthSize) { //换行
@@ -212,14 +184,14 @@ public class CustomTextView extends View {
                 templinelength += width;
             }
             startY_pinyin = mLinePadding + row * mLineHeight;
-            startY_hanzi = 2 * startY_pinyin - row * mLineHeight;
-            canvas.drawText(strs[1] + " ", startX_pinyin, startY_pinyin, spellPaint);
-            canvas.drawText(strs[0] + " ", startX_hanzi, startY_hanzi, paint);
-            if (templinelength < widthSize) {//画空格
+            startY_hanzi = 2 * (mLinePadding + row * mLineHeight) - row * mLineHeight;
+            canvas.drawText(strs[1] + " ", startX_pinyin + black_size, startY_pinyin, spellPaint);
+            canvas.drawText(strs[0] + " ", startX_hanzi + black_size, startY_hanzi, paint);
+            if (templinelength < widthSize - black_size) {//画空格
                 templinelength += black_size;
             }
         }
-        return (row + 1) * mLineHeight;
+        return row * mLineHeight + mLinePadding;
     }
 
     private List<String> textToList() {

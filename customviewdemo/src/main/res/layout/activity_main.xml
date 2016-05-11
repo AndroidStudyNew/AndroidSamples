@@ -39,13 +39,12 @@
 
     <com.sjtu.custom.view.CustomTextView
         android:id="@+id/ctv_2"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:layout_below="@+id/tv_name_chinese"
         android:background="@drawable/report_text_back"
-        custom:ctextSize="30sp"
-        custom:ctextSpellSize="30sp"
+        custom:ctextSize="18sp"
         custom:ctextLinePadding="20sp"
         custom:ctextColor="@color/colorPrimary"
         custom:ctextSpellColor="@color/colorAccent"

@@ -15,7 +15,6 @@
     <attr name="ctextColor" format="color"/>
     <attr name="ctextSize" format="dimension"/>
     <attr name="ctextSpellColor" format="color"/>
-    <attr name="ctextSpellSize" format="dimension"/>
     <attr name="ctextLinePadding" format="dimension"/>
 
     <declare-styleable name="CustomTextView">
@@ -23,7 +22,6 @@
         <attr name="ctextColor"/>
         <attr name="ctextSize"/>
         <attr name="ctextSpellColor"/>
-        <attr name="ctextSpellSize"/>
         <attr name="ctextLinePadding"/>
     </declare-styleable>
 </resources>
