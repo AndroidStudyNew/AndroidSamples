@@ -208,7 +208,7 @@ public class CustomTextView extends View {
                 templinelength += width;
             }
             startY_pinyin = mLinePadding + row * mLineHeight;
-            startY_hanzi = 2 * (mLinePadding + row * mLineHeight) - row * mLineHeight;
+            startY_hanzi = startY_pinyin + mSpellBound.height() * 4 / 3;
             canvas.drawText(strs[1] + " ", startX_pinyin + black_size, startY_pinyin, spellPaint);
             canvas.drawText(strs[0] + " ", startX_hanzi + black_size, startY_hanzi, paint);
             if (templinelength < widthSize - black_size) {//画空格
