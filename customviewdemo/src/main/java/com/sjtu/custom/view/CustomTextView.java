@@ -44,6 +44,8 @@ public class CustomTextView extends View {
 
     private int mLinePadding;
     private int mLineHeight;
+    private int mMeasureWidthSize;
+    private int mMeasureHeightSize;
 
     List<String> initTextToList;
 
@@ -113,7 +115,6 @@ public class CustomTextView extends View {
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        Log.e(TAG,"onMeasure");
         initTextToList = textToList();
         mPaint.setTextSize(mTextSize);
         mPaint.getTextBounds("测试",0,"测试".length(),mBound);
@@ -123,24 +124,47 @@ public class CustomTextView extends View {
         mSpellPaint.getTextBounds("ceshi",0,"ceshi".length(),mSpellBound);
         mSpellPaint.setColor(mTextSpellColor);
 
-        int widthSize = MeasureSpec.getSize(widthMeasureSpec);
+        //计算行高
         mLineHeight = getPaddingTop() + mBound.height() + mSpellBound.height() + getPaddingBottom() + mLinePadding;
-        int width = getPaddingLeft() + widthSize + getPaddingRight();
-        int height =getPaddingTop() +  drawReal(mSpellPaint,mPaint,width,null) + getPaddingBottom() + 2 * mLinePadding;
+
+
+        int widthMode = MeasureSpec.getMode(widthMeasureSpec);
+        int widthSize = MeasureSpec.getSize(widthMeasureSpec);
+        int heightMode = MeasureSpec.getMode(heightMeasureSpec);
+        int heightSize = MeasureSpec.getSize(heightMeasureSpec);
+        drawReal(mSpellPaint,mPaint,widthSize,null);
+        int width;
+        int height;
+
+        //计算view的高度
+        if (heightMode == MeasureSpec.EXACTLY) {
+            height = heightSize;
+        } else {
+            height =getPaddingTop() + mMeasureHeightSize + getPaddingBottom() + 2 * mLinePadding;
+        }
+
+        //计算view的宽度
+        if (widthMode == MeasureSpec.EXACTLY) {
+            width = widthSize;
+        } else {
+            width = getPaddingLeft() + mMeasureWidthSize + getPaddingRight();
+        }
+
+        Log.e(TAG,"width:" + width + ",height:" + height);
         setMeasuredDimension(width,height);
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        Log.e(TAG,"onDraw");
         drawReal(mSpellPaint,mPaint,getWidth(),canvas);
     }
 
-    private int drawReal(Paint spellPaint, Paint paint, int widthSize, Canvas canvas) {
+    private void drawReal(Paint spellPaint, Paint paint, int widthSize, Canvas canvas) {
         if (initTextToList == null || initTextToList.size() == 0) {
-            return 0;
+            return;
         }
+        int tempMeasureWidth = 0;
         int len = initTextToList.size();
         int row = 0;
         int templinelength = 0;
@@ -190,8 +214,10 @@ public class CustomTextView extends View {
             if (templinelength < widthSize - black_size) {//画空格
                 templinelength += black_size;
             }
+            tempMeasureWidth = templinelength + black_size;
         }
-        return row * mLineHeight + mLinePadding;
+        mMeasureWidthSize = (row == 0 ? tempMeasureWidth : widthSize);
+        mMeasureHeightSize = row * mLineHeight + mLinePadding;
     }
 
     private List<String> textToList() {

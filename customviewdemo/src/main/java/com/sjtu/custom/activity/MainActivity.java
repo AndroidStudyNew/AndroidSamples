@@ -21,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+//        str = "更新(gengxing)后(hou)";
         tv_name_chinese = (ScriptCardChineseView) findViewById(R.id.tv_name_chinese);
         tv_name_chinese.setStr(str);
         tv_name_chinese.setTextSizePinyin(18);

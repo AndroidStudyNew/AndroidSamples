@@ -45,7 +45,7 @@
         android:layout_below="@+id/tv_name_chinese"
         android:background="@drawable/report_text_back"
         custom:ctextSize="18sp"
-        custom:ctextLinePadding="20sp"
+        custom:ctextLinePadding="30dp"
         custom:ctextColor="@color/colorPrimary"
         custom:ctextSpellColor="@color/colorAccent"
         android:visibility="gone"/>
