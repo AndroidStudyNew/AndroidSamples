@@ -1,4 +1,4 @@
-include ':MessagingService'
+include ':MessagingService', ':BottomSheets'
 include ':applibs'
 include ':bluetooth'
 include ':customviewdemo'

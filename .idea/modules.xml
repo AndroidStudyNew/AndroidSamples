@@ -3,11 +3,12 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/AndroidSamples.iml" filepath="$PROJECT_DIR$/AndroidSamples.iml" />
-      <module fileurl="file://$PROJECT_DIR$/MessagingService/app.iml" filepath="$PROJECT_DIR$/MessagingService/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/MessagingService2.iml" filepath="$PROJECT_DIR$/MessagingService2.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/BottomSheets/BottomSheets.iml" filepath="$PROJECT_DIR$/BottomSheets/BottomSheets.iml" />
+      <module fileurl="file://$PROJECT_DIR$/MessagingService/MessagingService.iml" filepath="$PROJECT_DIR$/MessagingService/MessagingService.iml" />
       <module fileurl="file://$PROJECT_DIR$/applibs/applibs.iml" filepath="$PROJECT_DIR$/applibs/applibs.iml" />
-      <module fileurl="file://$PROJECT_DIR$/applibs/applibs.iml" filepath="$PROJECT_DIR$/applibs/applibs.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bluetooth/bluetooth.iml" filepath="$PROJECT_DIR$/bluetooth/bluetooth.iml" />
+      <module fileurl="file://$PROJECT_DIR$/customviewdemo/customviewdemo.iml" filepath="$PROJECT_DIR$/customviewdemo/customviewdemo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/permission/permission.iml" filepath="$PROJECT_DIR$/permission/permission.iml" />
     </modules>
   </component>
 </project>
