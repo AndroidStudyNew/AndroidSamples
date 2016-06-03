@@ -3,10 +3,13 @@ package com.sjtu.charles.activity;
 import android.os.Bundle;
 import android.support.v4.widget.SlidingPaneLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.hhl.swipebacksample.R;
+import com.sjtu.charles.view.PagerEnabledSlidingPaneLayout;
 
 import java.lang.reflect.Field;
 
@@ -22,15 +25,15 @@ public abstract class BaseActivity extends AppCompatActivity implements SlidingP
     protected void onCreate(Bundle savedInstanceState) {
         initSwipeBackFinish();
         super.onCreate(savedInstanceState);
-
     }
 
+    PagerEnabledSlidingPaneLayout slidingPaneLayout;
     /**
      * 初始化滑动返回
      */
     private void initSwipeBackFinish() {
         if (isSupportSwipeBack()) {
-            SlidingPaneLayout slidingPaneLayout = new SlidingPaneLayout(this);
+            slidingPaneLayout = new PagerEnabledSlidingPaneLayout(this);
             //通过反射改变mOverhangSize的值为0，这个mOverhangSize值为菜单到右边屏幕的最短距离，默认
             //是32dp，现在给它改成0
             try {
@@ -68,16 +71,18 @@ public abstract class BaseActivity extends AppCompatActivity implements SlidingP
 
     @Override
     public void onPanelClosed(View view) {
-
+        Log.i(TAG,"onPanelClosed");
     }
 
     @Override
     public void onPanelOpened(View view) {
+        Log.i(TAG,"onPanelOpened");
         finish();
         this.overridePendingTransition(0, R.anim.slide_out_right);
     }
 
     @Override
     public void onPanelSlide(View view, float v) {
+        Log.i(TAG,"onPanelSlide v : " + v);
     }
 }
