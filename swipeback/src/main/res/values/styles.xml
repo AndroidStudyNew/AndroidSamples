@@ -5,14 +5,14 @@
         <!-- Customize your theme here. -->
     </style>
 
-    <style name="JK.SwipeBack.Transparent.Theme" parent="AppTheme">
+    <style name="AppTheme.SwipeBack.Transparent.Theme" parent="AppTheme">
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:windowIsTranslucent">true</item>
-        <item name="android:windowAnimationStyle">@style/JK.Animation.SlidingBack</item>
-        <item name="android:actionBarStyle">@style/JKActionBar.Custom</item>
+        <item name="android:windowAnimationStyle">@style/AppTheme.Animation.SlidingBack</item>
+        <item name="android:actionBarStyle">@style/AppThemeActionBar.Custom</item>
     </style>
 
-    <style name="JKActionBar.Custom" parent="@style/Widget.AppCompat.Light.ActionBar.Solid.Inverse">
+    <style name="AppThemeActionBar.Custom" parent="@style/Widget.AppCompat.Light.ActionBar.Solid.Inverse">
         <item name="displayOptions">showCustom</item>
         <item name="android:background">@android:color/transparent</item>
         <item name="background">@android:color/transparent</item>
@@ -20,7 +20,7 @@
         <item name="android:height">?actionBarSize</item>
     </style>
 
-    <style name="JK.Animation.SlidingBack" parent="@android:style/Animation.Activity">
+    <style name="AppTheme.Animation.SlidingBack" parent="@android:style/Animation.Activity">
         <item name="android:activityOpenEnterAnimation">@anim/slide_in_right</item>
         <item name="android:activityOpenExitAnimation">@anim/slide_out_right</item>
         <item name="android:activityCloseEnterAnimation">@anim/slide_in_right</item>

@@ -1,8 +1,10 @@
-package com.hhl.swipebacksample;
+package com.sjtu.charles.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+
+import com.hhl.swipebacksample.R;
 
 public class MainActivity extends BaseActivity {
 

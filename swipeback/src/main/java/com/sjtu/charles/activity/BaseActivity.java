@@ -1,4 +1,4 @@
-package com.hhl.swipebacksample;
+package com.sjtu.charles.activity;
 
 import android.os.Bundle;
 import android.support.v4.widget.SlidingPaneLayout;
@@ -6,10 +6,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.hhl.swipebacksample.R;
+
 import java.lang.reflect.Field;
 
 /**
- * Created by hailonghan on 15/6/9.
+ * http://blog.csdn.net/hanhailong726188/article/details/46433229
+ * Created by zhuyifei on 16/6/3.
  */
 public abstract class BaseActivity extends AppCompatActivity implements SlidingPaneLayout.PanelSlideListener {
 

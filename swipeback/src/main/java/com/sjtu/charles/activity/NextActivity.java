@@ -1,10 +1,12 @@
-package com.hhl.swipebacksample;
+package com.sjtu.charles.activity;
 
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.RelativeLayout;
+
+import com.hhl.swipebacksample.R;
 
 import java.util.Random;
 
