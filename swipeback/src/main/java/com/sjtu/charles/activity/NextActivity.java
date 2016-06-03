@@ -30,6 +30,11 @@ public class NextActivity extends BaseActivity {
 
     }
 
+    @Override
+    protected boolean isSupportSwipeBack() {
+        return true;
+    }
+
     public void nextPage(View v) {
         startActivity(new Intent(this, NextActivity.class));
     }

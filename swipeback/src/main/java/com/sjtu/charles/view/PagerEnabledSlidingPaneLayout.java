@@ -60,7 +60,6 @@ public class PagerEnabledSlidingPaneLayout extends SlidingPaneLayout {
                 }
             }
         }
-
         return super.onInterceptTouchEvent(ev);
     }
 
@@ -77,7 +76,7 @@ public class PagerEnabledSlidingPaneLayout extends SlidingPaneLayout {
             case MotionEvent.ACTION_MOVE: {
                 // The user should always be able to "close" the pane, so we only check
                 // for child scrollability if the pane is currently closed.
-                if (mInitialMotionX > 10) {
+                if (mInitialMotionX > 20) {
                     // How do we set super.mIsUnableToDrag = true?
                     // send the parent a cancel event
                     MotionEvent cancelEvent = MotionEvent.obtain(ev);

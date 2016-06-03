@@ -16,11 +16,6 @@ public class MainActivity extends BaseActivity {
         setContentView(R.layout.activity_main);
     }
 
-    @Override
-    protected boolean isSupportSwipeBack() {
-        return false;
-    }
-
     public void nextPage(View v){
         startActivity(new Intent(this,NextActivity.class));
     }
