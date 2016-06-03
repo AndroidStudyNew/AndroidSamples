@@ -4,7 +4,6 @@ import android.content.Context;
 import android.support.v4.view.MotionEventCompat;
 import android.support.v4.widget.SlidingPaneLayout;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.ViewConfiguration;
 
@@ -32,7 +31,6 @@ public class PagerEnabledSlidingPaneLayout extends SlidingPaneLayout {
 
         ViewConfiguration config = ViewConfiguration.get(context);
         mEdgeSlop = config.getScaledEdgeSlop();
-        Log.i(TAG,"mEdgeSlop:" + mEdgeSlop);
     }
 
     @Override
@@ -77,11 +75,8 @@ public class PagerEnabledSlidingPaneLayout extends SlidingPaneLayout {
             }
 
             case MotionEvent.ACTION_MOVE: {
-                final float x = ev.getX();
-                final float y = ev.getY();
                 // The user should always be able to "close" the pane, so we only check
                 // for child scrollability if the pane is currently closed.
-                Log.i(TAG,"mInitialMotionX:" + mInitialMotionX);
                 if (mInitialMotionX > 10) {
                     // How do we set super.mIsUnableToDrag = true?
                     // send the parent a cancel event
