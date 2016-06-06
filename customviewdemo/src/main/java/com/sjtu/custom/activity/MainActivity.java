@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
         tv_name_chinese.setVisibility(View.GONE);
 
         mCTV = (CustomTextView) findViewById(R.id.ctv_2);
-        mCTV.seText(str  + str);
+        mCTV.setText(str  + str);
         mCTV.setVisibility(View.VISIBLE);
     }
 }

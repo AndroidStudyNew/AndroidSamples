@@ -108,7 +108,7 @@ public class CustomTextView extends View {
         mSpellBound = new Rect();
     }
 
-    public void seText(String str) {
+    public void setText(String str) {
         mText = str;
         invalidate();
     }
