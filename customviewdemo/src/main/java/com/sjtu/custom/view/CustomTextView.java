@@ -125,7 +125,7 @@ public class CustomTextView extends View {
         mSpellPaint.setColor(mTextSpellColor);
 
         //计算行高
-        mLineHeight = getPaddingTop() + mBound.height() + mSpellBound.height() + getPaddingBottom() + mLinePadding;
+        mLineHeight = mBound.height() + mSpellBound.height() + mLinePadding;
 
 
         int widthMode = MeasureSpec.getMode(widthMeasureSpec);
@@ -140,7 +140,7 @@ public class CustomTextView extends View {
         if (heightMode == MeasureSpec.EXACTLY) {
             height = heightSize;
         } else {
-            height =getPaddingTop() + mMeasureHeightSize + getPaddingBottom() + 2 * mLinePadding;
+            height =getPaddingTop() + mMeasureHeightSize + getPaddingBottom();
         }
 
         //计算view的宽度
@@ -172,7 +172,7 @@ public class CustomTextView extends View {
             canvas = new Canvas();
         }
         int width_hanzi, width_pinyin, width;
-        int startX_hanzi, startY_hanzi, startX_pinyin, startY_pinyin;
+        int startX_hanzi, startY_hanzi = 0, startX_pinyin, startY_pinyin;
         int black_size = spellPaint.measureText(" ") > paint.measureText(" ")
                 ? (int) spellPaint.measureText(" ") : (int) paint.measureText(" ");
         for (int i = 0; i < len; i++) {
@@ -184,14 +184,15 @@ public class CustomTextView extends View {
                 width = width_hanzi;
                 startX_hanzi = templinelength;
                 startX_pinyin = startX_hanzi + (width_hanzi - width_pinyin) / 2;
+                templinelength = width + startX_hanzi + (int) paint.measureText(" ");
             } else {
                 //拼音长
                 width = width_pinyin;
                 startX_pinyin = templinelength;
                 startX_hanzi = startX_pinyin + (width_pinyin - width_hanzi) / 2;
+                templinelength = width + startX_pinyin + black_size;
             }
-            templinelength += width;
-            if (templinelength > widthSize) { //换行
+            if (templinelength + getPaddingLeft() + getPaddingRight() > widthSize) { //换行
                 row++;
                 templinelength = 0;
                 if (width_hanzi >= width_pinyin) {
@@ -199,15 +200,16 @@ public class CustomTextView extends View {
                     width = width_hanzi;
                     startX_hanzi = templinelength;
                     startX_pinyin = startX_hanzi + (width_hanzi - width_pinyin) / 2;
+                    templinelength = width + startX_hanzi + black_size;
                 } else {
                     //拼音长
                     width = width_pinyin;
                     startX_pinyin = templinelength;
                     startX_hanzi = startX_pinyin + (width_pinyin - width_hanzi) / 2;
+                    templinelength = width + startX_pinyin + black_size;
                 }
-                templinelength += width;
             }
-            startY_pinyin = mLinePadding + row * mLineHeight;
+            startY_pinyin = mLinePadding + row * mLineHeight + getPaddingTop();
             startY_hanzi = startY_pinyin + mSpellBound.height() * 4 / 3;
             canvas.drawText(strs[1] + " ", startX_pinyin + black_size, startY_pinyin, spellPaint);
             canvas.drawText(strs[0] + " ", startX_hanzi + black_size, startY_hanzi, paint);
@@ -217,7 +219,7 @@ public class CustomTextView extends View {
             tempMeasureWidth = templinelength + black_size;
         }
         mMeasureWidthSize = (row == 0 ? tempMeasureWidth : widthSize);
-        mMeasureHeightSize = row * mLineHeight + mLinePadding;
+        mMeasureHeightSize = startY_hanzi - mLinePadding;
     }
 
     private List<String> textToList() {

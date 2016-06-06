@@ -12,6 +12,7 @@ import com.sjtu.custom.view.ScriptCardChineseView;
 
 public class MainActivity extends AppCompatActivity {
 
+    public static String str1 = "更新(gengxing)后(hou)";
     public static String str = "更新(gengxing)后(hou)可能(keneng)启动(qidong)不(bu)了(liao)，这时(zheshi)要在(yaozai)网上(wangshang)寻找(xuzhao)不(bu)了(liao)，这时(zheshi)要在(yaozai)网上(wangshang)寻找(xuzhao)";
     ScriptCardChineseView tv_name_chinese;
     CustomTextView mCTV;
@@ -23,14 +24,14 @@ public class MainActivity extends AppCompatActivity {
 
 //        str = "更新(gengxing)后(hou)";
         tv_name_chinese = (ScriptCardChineseView) findViewById(R.id.tv_name_chinese);
-        tv_name_chinese.setStr(str);
+        tv_name_chinese.setStr(str + str);
         tv_name_chinese.setTextSizePinyin(18);
         tv_name_chinese.setTextSizeHanzi(22);
         tv_name_chinese.setTextColor(ContextCompat.getColor(this, R.color.clr_09C0CE));
-        tv_name_chinese.setVisibility(View.VISIBLE);
+        tv_name_chinese.setVisibility(View.GONE);
 
         mCTV = (CustomTextView) findViewById(R.id.ctv_2);
-        mCTV.seText(str);
+        mCTV.seText(str  + str);
         mCTV.setVisibility(View.VISIBLE);
     }
 }
