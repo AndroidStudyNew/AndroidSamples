@@ -9,7 +9,8 @@
       <module fileurl="file://$PROJECT_DIR$/bluetooth/bluetooth.iml" filepath="$PROJECT_DIR$/bluetooth/bluetooth.iml" />
       <module fileurl="file://$PROJECT_DIR$/customviewdemo/customviewdemo.iml" filepath="$PROJECT_DIR$/customviewdemo/customviewdemo.iml" />
       <module fileurl="file://$PROJECT_DIR$/permission/permission.iml" filepath="$PROJECT_DIR$/permission/permission.iml" />
-      <module fileurl="file://$PROJECT_DIR$/swipeback/app.iml" filepath="$PROJECT_DIR$/swipeback/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/refreshloadmore/refreshloadmore.iml" filepath="$PROJECT_DIR$/refreshloadmore/refreshloadmore.iml" />
+      <module fileurl="file://$PROJECT_DIR$/swipeback/swipeback.iml" filepath="$PROJECT_DIR$/swipeback/swipeback.iml" />
     </modules>
   </component>
 </project>

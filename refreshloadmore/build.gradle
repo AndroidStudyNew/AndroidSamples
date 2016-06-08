@@ -4,8 +4,9 @@ android {
     compileSdkVersion rootProject.ext.compileSdkVersion
     buildToolsVersion rootProject.ext.buildToolsVersion
 
+
     defaultConfig {
-        applicationId "com.sjtu.charles.swipback"
+        applicationId "com.sjtu.charles.demo"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
@@ -17,9 +18,23 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    //添加渠道
+    productFlavors {
+        default_channel{}
+        xiaomi {}
+        qihu360 {}
+        baidu {}
+        wandoujia {}
+    }
+    productFlavors.all {
+        flavor -> flavor.manifestPlaceholders = [UMENG_CHANNEL_VALUE: name]
+    }
+
 }
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile project(':applibs')
+    compile 'com.jakewharton:butterknife:5.1.1'
+    compile project(path: ':applibs')
 }
