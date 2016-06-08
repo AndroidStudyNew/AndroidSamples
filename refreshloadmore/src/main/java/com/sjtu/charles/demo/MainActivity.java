@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         final LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
-        adapter.setRecyclerView(recyclerView, swipeRefreshLayout);
+        adapter.setRecyclerView(recyclerView);
         adapter.setOnLoadMoreListener(this);
         adapter.setOnItemClickListener(this);
         initData();
@@ -81,7 +81,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         }
         adapter.notifyDataSetChanged();
         swipeRefreshLayout.setRefreshing(false);
-        adapter.notifyItemRemoved(adapter.getItemCount());
+        adapter.setLoading(false);
     }
 
     @Override
