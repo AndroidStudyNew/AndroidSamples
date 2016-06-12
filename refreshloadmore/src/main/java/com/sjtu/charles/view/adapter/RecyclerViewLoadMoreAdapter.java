@@ -3,9 +3,11 @@ package com.sjtu.charles.view.adapter;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.Adapter;
 import android.support.v7.widget.RecyclerView.ViewHolder;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.sjtu.charles.demo.R;
 
@@ -41,16 +43,40 @@ public class RecyclerViewLoadMoreAdapter extends Adapter<ViewHolder> {
 
             public void onScrolledToBottom() {
                 if (onLoadMoreListener != null) {
-                    onLoadMoreListener.OnLoadMore();
                     setLoading(true);
+                    onLoadMoreListener.OnLoadMore();
                 }
             }
         });
     }
 
     public void setLoading(boolean flag) {
-        if (view != null)
-            view.setVisibility(flag?View.VISIBLE:View.GONE);
+        if (FootViewHolder.mLoadingView != null) {
+            FootViewHolder.mLoadingView.setVisibility(flag?View.VISIBLE:View.GONE);
+        }
+        if (FootViewHolder.mLoadingNoMore != null) {
+            FootViewHolder.mLoadingNoMore.setVisibility(View.GONE);
+        }
+    }
+
+    /**
+     * 加载结束提示信息
+     * @param text 低部显示提示信息
+     */
+    public void setLoadedHint(CharSequence text) {
+        if (FootViewHolder.mLoadingView != null) {
+            FootViewHolder.mLoadingView.setVisibility(View.GONE);
+        }
+        if (FootViewHolder.mLoadingNoMore != null) {
+            FootViewHolder.mLoadingNoMore.setVisibility(View.VISIBLE);
+            if (!TextUtils.isEmpty(text)) {
+                FootViewHolder.mLoadingNoMore.setText(text);
+            }
+        }
+    }
+
+    public void setLoadedHint() {
+        setLoadedHint(null);
     }
 
     @Override
@@ -66,12 +92,19 @@ public class RecyclerViewLoadMoreAdapter extends Adapter<ViewHolder> {
         return 0;
     }
 
-    View view;
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (viewType == TYPE_FOOTER) {
-            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_foot, parent, false);
-            setLoading(false);
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_foot, parent, false);
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (onLoadMoreListener != null) {
+                        setLoading(true);
+                        onLoadMoreListener.OnLoadMore();
+                    }
+                }
+            });
             return new FootViewHolder(view);
         }
         return null;
@@ -82,10 +115,18 @@ public class RecyclerViewLoadMoreAdapter extends Adapter<ViewHolder> {
 
     }
 
+
     static class FootViewHolder extends ViewHolder {
+        static View mLoadingView;
+        static TextView mLoadingNoMore;
+
         public FootViewHolder(View view) {
             super(view);
+            mLoadingNoMore = (TextView) view.findViewById(R.id.tv_load_no_more);
+            mLoadingView = view.findViewById(R.id.ll_loading_more);
         }
+
+
     }
 
     public interface OnLoadMoreListener {
