@@ -8,6 +8,7 @@
       <module fileurl="file://$PROJECT_DIR$/applibs/applibs.iml" filepath="$PROJECT_DIR$/applibs/applibs.iml" />
       <module fileurl="file://$PROJECT_DIR$/bluetooth/bluetooth.iml" filepath="$PROJECT_DIR$/bluetooth/bluetooth.iml" />
       <module fileurl="file://$PROJECT_DIR$/customviewdemo/customviewdemo.iml" filepath="$PROJECT_DIR$/customviewdemo/customviewdemo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/facedetector/facedetector.iml" filepath="$PROJECT_DIR$/facedetector/facedetector.iml" />
       <module fileurl="file://$PROJECT_DIR$/multithreaddownload/multithreaddownload.iml" filepath="$PROJECT_DIR$/multithreaddownload/multithreaddownload.iml" />
       <module fileurl="file://$PROJECT_DIR$/permission/permission.iml" filepath="$PROJECT_DIR$/permission/permission.iml" />
       <module fileurl="file://$PROJECT_DIR$/refreshloadmore/refreshloadmore.iml" filepath="$PROJECT_DIR$/refreshloadmore/refreshloadmore.iml" />
