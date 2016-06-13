@@ -82,6 +82,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         adapter.notifyDataSetChanged();
         swipeRefreshLayout.setRefreshing(false);
         adapter.setLoading(false);
+        adapter.setLoadedHint("点击加载更多");
     }
 
     @Override
