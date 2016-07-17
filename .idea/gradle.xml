@@ -3,14 +3,16 @@
   <component name="GradleSettings">
     <option name="linkedExternalProjectsSettings">
       <GradleProjectSettings>
-        <option name="distributionType" value="DEFAULT_WRAPPED" />
+        <option name="distributionType" value="LOCAL" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="gradleHome" value="D:\Android\android-studio2.0\gradle\gradle-2.10" />
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/BottomSheets" />
             <option value="$PROJECT_DIR$/MessagingService" />
             <option value="$PROJECT_DIR$/applibs" />
+            <option value="$PROJECT_DIR$/asynctask" />
             <option value="$PROJECT_DIR$/bluetooth" />
             <option value="$PROJECT_DIR$/customviewdemo" />
             <option value="$PROJECT_DIR$/facedetector" />
@@ -26,6 +28,7 @@
             <option value="$PROJECT_DIR$/BottomSheets" />
             <option value="$PROJECT_DIR$/MessagingService" />
             <option value="$PROJECT_DIR$/applibs" />
+            <option value="$PROJECT_DIR$/asynctask" />
             <option value="$PROJECT_DIR$/bluetooth" />
             <option value="$PROJECT_DIR$/customviewdemo" />
             <option value="$PROJECT_DIR$/facedetector" />

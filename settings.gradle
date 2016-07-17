@@ -1,4 +1,4 @@
-include ':MessagingService', ':BottomSheets', ':swipeback', ':refreshloadmore', ':multithreaddownload', ':facedetector'
+include ':MessagingService', ':BottomSheets', ':swipeback', ':refreshloadmore', ':multithreaddownload', ':facedetector', ':asynctask'
 include ':applibs'
 include ':bluetooth'
 include ':customviewdemo'
