@@ -20,6 +20,7 @@
             <option value="$PROJECT_DIR$/permission" />
             <option value="$PROJECT_DIR$/refreshloadmore" />
             <option value="$PROJECT_DIR$/swipeback" />
+            <option value="$PROJECT_DIR$/webview.recycleview" />
           </set>
         </option>
         <option name="myModules">
@@ -36,6 +37,7 @@
             <option value="$PROJECT_DIR$/permission" />
             <option value="$PROJECT_DIR$/refreshloadmore" />
             <option value="$PROJECT_DIR$/swipeback" />
+            <option value="$PROJECT_DIR$/webview.recycleview" />
           </set>
         </option>
       </GradleProjectSettings>
