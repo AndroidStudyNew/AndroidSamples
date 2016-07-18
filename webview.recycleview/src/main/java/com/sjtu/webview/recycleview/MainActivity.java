@@ -21,7 +21,9 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.ViewGroup;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -31,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
 
     private RecyclerView mRecyclerView;
     private List<String> mDatas;
-    private WebView webview;
+    private WebView mainWebView;
     private HomeAdapter mAdapter;
 
     @Override
@@ -42,11 +44,14 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         //实例化WebView对象
-        webview = (WebView) findViewById(R.id.wv);
-        //设置WebView属性，能够执行Javascript脚本
-        webview.getSettings().setJavaScriptEnabled(true);
-        //加载需要显示的网页
-        webview.loadUrl("http://www.51cto.com/");
+        mainWebView = (WebView) findViewById(R.id.wv);
+        WebSettings webSettings = mainWebView.getSettings();
+        webSettings.setJavaScriptEnabled(true);
+
+        mainWebView.setWebViewClient(new MyCustomWebViewClient());
+        mainWebView.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
+
+        mainWebView.loadUrl("http://www.jianshu.com/p/c7060f84bf5c");
 
         initData();
         mRecyclerView = (RecyclerView) findViewById(R.id.rv);
@@ -89,6 +94,14 @@ public class MainActivity extends AppCompatActivity {
                 super(view);
                 tv = (TextView) view.findViewById(R.id.id_num);
             }
+        }
+    }
+
+    private class MyCustomWebViewClient extends WebViewClient {
+        @Override
+        public boolean shouldOverrideUrlLoading(WebView view, String url) {
+            view.loadUrl(url);
+            return true;
         }
     }
 }
