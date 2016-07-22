@@ -26,7 +26,7 @@ import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public class ScrollingActivity extends AppCompatActivity {
+public class AsyncTaskTestActivity extends AppCompatActivity {
     private static int ID = 0;
     private static final int TASK_COUNT = 9;
     private static ExecutorService SINGLE_TASK_EXECUTOR;
@@ -140,31 +140,32 @@ public class ScrollingActivity extends AppCompatActivity {
             mTaskItem.setProgress(values[0]);
         }
     }
+
+    class TaskItem extends LinearLayout {
+        private TextView mTitle;
+        private ProgressBar mProgress;
+
+        public TaskItem(Context context, AttributeSet attrs) {
+            super(context, attrs);
+        }
+
+        public TaskItem(Context context) {
+            super(context);
+        }
+
+        public void setTitle(String title) {
+            if (mTitle == null) {
+                mTitle = (TextView) findViewById(R.id.task_name);
+            }
+            mTitle.setText(title);
+        }
+
+        public void setProgress(int prog) {
+            if (mProgress == null) {
+                mProgress = (ProgressBar) findViewById(R.id.task_progress);
+            }
+            mProgress.setProgress(prog);
+        }
+    }
 }
 
-class TaskItem extends LinearLayout {
-    private TextView mTitle;
-    private ProgressBar mProgress;
-
-    public TaskItem(Context context, AttributeSet attrs) {
-        super(context, attrs);
-    }
-
-    public TaskItem(Context context) {
-        super(context);
-    }
-
-    public void setTitle(String title) {
-        if (mTitle == null) {
-            mTitle = (TextView) findViewById(R.id.task_name);
-        }
-        mTitle.setText(title);
-    }
-
-    public void setProgress(int prog) {
-        if (mProgress == null) {
-            mProgress = (ProgressBar) findViewById(R.id.task_progress);
-        }
-        mProgress.setProgress(prog);
-    }
-}
