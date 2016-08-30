@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">HttpURLConnectionDemo</string>
+    <string name="action_settings">Settings</string>
+</resources>
