@@ -114,14 +114,14 @@ public class MyNestedScrollView extends NestedScrollView implements ScrollDirect
     @Override
     protected void onFinishInflate() {
         super.onFinishInflate();
-        analyNestedScrollingChildViews();
+        analyzeNestedScrollingChildViews();
     }
 
     /**
      * nestedScrollingChild 只能嵌套在rootChild的第一层 <p>
      * 获取 implements nestedScrollingChild view list
      */
-    private void analyNestedScrollingChildViews() {
+    private void analyzeNestedScrollingChildViews() {
         View rootChild = getChildAt(0);
         if (rootChild == null || !(rootChild instanceof ViewGroup)) {
             throw new IllegalArgumentException("EmbeddedScrollView root child illegal");
@@ -158,7 +158,7 @@ public class MyNestedScrollView extends NestedScrollView implements ScrollDirect
                     ViewGroup.LayoutParams params = view.getLayoutParams();
                     if (params.height == ViewGroup.LayoutParams.MATCH_PARENT || params.height == ViewGroup.LayoutParams.WRAP_CONTENT || params.height == ViewGroup.LayoutParams.FILL_PARENT) {
                         int scrollViewH = getMeasuredHeight();
-                        params.height = scrollViewH;
+                        params.height = scrollViewH + 100;
                         view.setLayoutParams(params);
                         Log.i(TAG, "setNestedScrollViewHeight = " + scrollViewH + "  view = " + view);
                     }
@@ -198,6 +198,69 @@ public class MyNestedScrollView extends NestedScrollView implements ScrollDirect
     public void onChildPositionChange(SCROLL_POSITION position) {
 
     }
+
+    boolean consumeEvent = false;
+    @Override
+    public void onNestedPreScroll(View target, int dx, int dy, int[] consumed) {
+        int scrollY = getScrollY();
+        Log.v(TAG, "onNestedPreScroll : direction = " + direction + "  currentSwapLine = " + currentSwapLine + "  dy = " + dy + "  scrollY = " + scrollY);
+
+        if(scrollY < currentSwapLine){
+            Log.v(TAG, "consumeEvent 111111");
+            if(direction == ScrollDirectionDetector.DIRECTION_DOWN){
+                if(currentSwapLine != -1 && (scrollY + dy) > currentSwapLine) dy = currentSwapLine - scrollY;
+            }
+            consumeEvent(dx, dy, consumed);
+            return;
+        }
+        if(scrollY > currentSwapLine){
+            Log.v(TAG, "consumeEvent 222222");
+            if(direction == ScrollDirectionDetector.DIRECTION_UP){
+                if(currentSwapLine != -1 && (scrollY + dy) < currentSwapLine) dy = currentSwapLine - scrollY;
+            }
+            consumeEvent(dx, dy, consumed);
+            return;
+        }
+
+    }
+
+    private void consumeEvent(int dx, int dy, int[] consumed) {
+        scrollBy(dx, dy);
+        consumed[0] = 0;
+        consumed[1] = dy;
+        consumeEvent = true;
+        Log.i(TAG, "parent consumed pre : " + consumed[1]);
+    }
+
+
+    @Override
+    public void onNestedScroll(View target, int dxConsumed, int dyConsumed, int dxUnconsumed, int dyUnconsumed) {
+        Log.i(TAG, "parent consumed : dyConsumed = " + dyConsumed + " , dyUnconsumed = " + dyUnconsumed);
+        scrollBy(dxUnconsumed, dyUnconsumed);
+        consumeEvent = true;
+    }
+
+    @Override
+    public boolean onNestedPreFling(View target, float velocityX, float velocityY) {
+        Log.i(TAG, "onNestedPreFling : " + " direction = " + direction + " currentSwapLine = " + currentSwapLine + " velocityY = " + velocityY + " scrollY = " + getScrollY());
+
+        int scrollY = getScrollY();
+
+        if(scrollY < currentSwapLine){
+            Log.v(TAG, "fling 111111");
+            fling((int) velocityY);
+            consumeEvent = true;
+            return true;
+        }
+        if(scrollY > currentSwapLine){
+            Log.v(TAG, "fling 222222");
+            fling((int) velocityY);
+            consumeEvent = true;
+            return true;
+        }
+        return false;
+    }
+
 
 
     /**

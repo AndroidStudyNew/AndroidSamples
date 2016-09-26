@@ -33,11 +33,24 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@color/colorAccent"
+                android:text="ccccc"/>
+
             <WebView
                 android:id="@+id/wv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:scrollbars="vertical" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:background="@color/colorAccent"
+                android:text="ccccc"/>
+
         </LinearLayout>
 
     </com.sjtu.widget.MyNestedScrollView>
