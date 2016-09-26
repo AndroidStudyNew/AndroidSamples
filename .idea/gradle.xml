@@ -17,31 +17,17 @@
             <option value="$PROJECT_DIR$/bluetooth" />
             <option value="$PROJECT_DIR$/customviewdemo" />
             <option value="$PROJECT_DIR$/facedetector" />
+            <option value="$PROJECT_DIR$/httpurlconnectiondemo" />
             <option value="$PROJECT_DIR$/multithreaddownload" />
             <option value="$PROJECT_DIR$/permission" />
             <option value="$PROJECT_DIR$/refreshloadmore" />
             <option value="$PROJECT_DIR$/swipeback" />
+            <option value="$PROJECT_DIR$/testdrawlayout" />
+            <option value="$PROJECT_DIR$/toolbar" />
             <option value="$PROJECT_DIR$/webview.recycleview" />
           </set>
         </option>
-        <option name="myModules">
-          <set>
-            <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/BottomSheets" />
-            <option value="$PROJECT_DIR$/MessagingService" />
-            <option value="$PROJECT_DIR$/applibs" />
-            <option value="$PROJECT_DIR$/asynctask" />
-            <option value="$PROJECT_DIR$/asynctaskdemo" />
-            <option value="$PROJECT_DIR$/bluetooth" />
-            <option value="$PROJECT_DIR$/customviewdemo" />
-            <option value="$PROJECT_DIR$/facedetector" />
-            <option value="$PROJECT_DIR$/multithreaddownload" />
-            <option value="$PROJECT_DIR$/permission" />
-            <option value="$PROJECT_DIR$/refreshloadmore" />
-            <option value="$PROJECT_DIR$/swipeback" />
-            <option value="$PROJECT_DIR$/webview.recycleview" />
-          </set>
-        </option>
+        <option name="resolveModulePerSourceSet" value="false" />
       </GradleProjectSettings>
     </option>
   </component>

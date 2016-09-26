@@ -2,6 +2,7 @@ package com.sjtu.webview.recycleview;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.AppCompatPopupWindow;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -20,7 +21,7 @@ import java.util.List;
 
 public class Test2Activity extends AppCompatActivity {
 
-    private RecyclerView mRecyclerView;
+//    private RecyclerView mRecyclerView;
     private List<String> mDatas;
     private WebView mainWebView;
     private HomeAdapter mAdapter;
@@ -41,12 +42,12 @@ public class Test2Activity extends AppCompatActivity {
         mainWebView.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
 
         mainWebView.loadUrl("http://www.jianshu.com/p/a00f5f2ab2f5");
-
+        AppCompatPopupWindow appCompatPopupWindow ;
         initData();
-        mRecyclerView = (RecyclerView) findViewById(R.id.rv);
-        mRecyclerView.setNestedScrollingEnabled(false);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        mRecyclerView.setAdapter(mAdapter = new HomeAdapter());
+//        mRecyclerView = (RecyclerView) findViewById(R.id.rv);
+//        mRecyclerView.setNestedScrollingEnabled(false);
+//        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+//        mRecyclerView.setAdapter(mAdapter = new HomeAdapter());
     }
 
     protected void initData() {

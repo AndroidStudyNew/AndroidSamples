@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.TextView;
 
 import com.sjtu.adapter.base.HeaderRecyclerViewAdapterV2;
@@ -100,7 +101,18 @@ public class HomeAdapter extends HeaderRecyclerViewAdapterV2 {
             wv = (WebView) view.findViewById(R.id.wv);
             WebSettings webSettings = wv.getSettings();
             webSettings.setJavaScriptEnabled(true);
-
+            webSettings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
+            wv.setVerticalScrollBarEnabled(false);
+            wv.setVerticalScrollbarOverlay(false);
+            wv.setHorizontalScrollBarEnabled(false);
+            wv.setHorizontalScrollbarOverlay(false);
+            wv.setWebViewClient(new WebViewClient() {
+                @Override
+                public void onPageFinished(WebView view, String url) {
+                    super.onPageFinished(view, url);
+                    wv.invalidate();
+                }
+            });
         }
     }
 }
