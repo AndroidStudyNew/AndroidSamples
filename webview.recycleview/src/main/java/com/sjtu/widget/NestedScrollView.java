@@ -1609,10 +1609,10 @@ public class NestedScrollView extends FrameLayout implements NestedScrollingPare
     @Override
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
         super.onLayout(changed, l, t, r, b);
+        Log.d(TAG,"onLayout dddddddddd");
         if(firstInitSize){
-            setNestedScrollViewHeight();
-//            setCurrentSwapLine(scrollingChildList.get(0).getTop());
             firstInitSize = false;
+            setNestedScrollViewHeight();
         }
 
         mIsLayoutDirty = false;
@@ -1873,7 +1873,7 @@ public class NestedScrollView extends FrameLayout implements NestedScrollingPare
      * 如果 scrollingChildList 中的 view 没有设定具体高度,默认设置成 EmbeddedScrollView 的高度
      */
     private void setNestedScrollViewHeight(){
-
+        Log.i(TAG, "setNestedScrollViewHeight dddddddddd");
         for(View view : scrollingChildList){
             ViewGroup.LayoutParams params = view.getLayoutParams();
             if(params.height == ViewGroup.LayoutParams.MATCH_PARENT || params.height == ViewGroup.LayoutParams.WRAP_CONTENT || params.height == ViewGroup.LayoutParams.FILL_PARENT){
@@ -1881,12 +1881,17 @@ public class NestedScrollView extends FrameLayout implements NestedScrollingPare
                 params.height = scrollViewH;
                 if (view instanceof NestedWebView) {
                     params.height = ((NestedWebView)view).computeVerticalScrollRange();
-                    Log.i(TAG, "NestedWebView setNestedScrollViewHeight = " + scrollViewH + "  view = " + view);
+                    if (params.height == 0) {
+                        firstInitSize = true;
+                    } else {
+                        view.setLayoutParams(params);
+                    }
+                    Log.i(TAG, "NestedWebView dddddddddd params.height = " +  params.height);
                 } else if (view instanceof RecyclerView) {
                     params.height = ((RecyclerView)view).computeVerticalScrollRange();
-                    Log.i(TAG, "RecyclerView setNestedScrollViewHeight = " + scrollViewH + "  view = " + view);
+                    Log.i(TAG, "RecyclerView dddddddddd params.height = " +  params.height);
+                    view.setLayoutParams(params);
                 }
-                view.setLayoutParams(params);
             }
         }
     }
