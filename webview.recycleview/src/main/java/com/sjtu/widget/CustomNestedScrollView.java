@@ -20,32 +20,27 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 注意:nestedScrollingChild 只能嵌套在rootChild的第一层 {@link EmbeddedScrollView#analyNestedScrollingChildViews()}<p>
+ * 注意:nestedScrollingChild 只能嵌套在rootChild的第一层 {@link CustomNestedScrollView#analyNestedScrollingChildViews()}<p>
  * Created by taotao on 15/11/7.
  */
-public class EmbeddedScrollView extends ScrollView implements NestedScrollingParent, NestedScrollingChild, ScrollDirectionDetector.ChildScrollStateChangedListener, ScrollDismissBehavior.OnScroll{
+public class CustomNestedScrollView extends NestedScrollView implements ScrollDirectionDetector.ChildScrollStateChangedListener, ScrollDismissBehavior.OnScroll{
 
     private static final String TAG = "***********************";
-
-    private NestedScrollingParentHelper mParentHelper;
-    private NestedScrollingChildHelper mChildHelper;
 
     private int touchSlop;
     private static int SENSOR_DISTANCE;
 
-    public EmbeddedScrollView(Context context) {
+    public CustomNestedScrollView(Context context) {
         this(context, null);
     }
 
-    public EmbeddedScrollView(Context context, AttributeSet attrs) {
+    public CustomNestedScrollView(Context context, AttributeSet attrs) {
         super(context, attrs);
         init();
     }
 
     private void init(){
         setOverScrollMode(OVER_SCROLL_NEVER);
-        mParentHelper = new NestedScrollingParentHelper(this);
-        mChildHelper = new NestedScrollingChildHelper(this);
         ViewConfiguration configuration = ViewConfiguration.get(this.getContext());
         touchSlop = configuration.getScaledTouchSlop();
         SENSOR_DISTANCE = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 200, getResources().getDisplayMetrics());
@@ -236,7 +231,7 @@ public class EmbeddedScrollView extends ScrollView implements NestedScrollingPar
         ViewGroup root = (ViewGroup) rootChild;
         for(int i = 0 ; i < root.getChildCount(); i++){
             View child = root.getChildAt(i);
-            if(child instanceof NestedScrollingChild){
+            if(child instanceof WebView){
                 scrollingChildList.add(child);
             }
         }

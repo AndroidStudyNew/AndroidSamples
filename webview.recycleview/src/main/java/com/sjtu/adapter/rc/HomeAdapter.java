@@ -20,6 +20,8 @@ import java.util.List;
  */
 public class HomeAdapter extends HeaderRecyclerViewAdapterV2 {
 
+    private static final String TAG = "HomeAdapter";
+
     private List<String> mDatas;
 
     public HomeAdapter(List<String> datas) {
@@ -110,7 +112,8 @@ public class HomeAdapter extends HeaderRecyclerViewAdapterV2 {
                 @Override
                 public void onPageFinished(WebView view, String url) {
                     super.onPageFinished(view, url);
-                    wv.invalidate();
+                    int height = view.getMeasuredHeight();
+                    Log.d(TAG,"height:" + height);
                 }
             });
         }

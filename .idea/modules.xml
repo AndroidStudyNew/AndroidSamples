@@ -16,6 +16,7 @@
       <module fileurl="file://$PROJECT_DIR$/permission/permission.iml" filepath="$PROJECT_DIR$/permission/permission.iml" />
       <module fileurl="file://$PROJECT_DIR$/refreshloadmore/refreshloadmore.iml" filepath="$PROJECT_DIR$/refreshloadmore/refreshloadmore.iml" />
       <module fileurl="file://$PROJECT_DIR$/swipeback/swipeback.iml" filepath="$PROJECT_DIR$/swipeback/swipeback.iml" />
+      <module fileurl="file://$PROJECT_DIR$/test/test.iml" filepath="$PROJECT_DIR$/test/test.iml" />
       <module fileurl="file://$PROJECT_DIR$/testdrawlayout/testdrawlayout.iml" filepath="$PROJECT_DIR$/testdrawlayout/testdrawlayout.iml" />
       <module fileurl="file://$PROJECT_DIR$/toolbar/toolbar.iml" filepath="$PROJECT_DIR$/toolbar/toolbar.iml" />
       <module fileurl="file://$PROJECT_DIR$/webview.recycleview/webview.recycleview.iml" filepath="$PROJECT_DIR$/webview.recycleview/webview.recycleview.iml" />

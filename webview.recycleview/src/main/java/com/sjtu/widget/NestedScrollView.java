@@ -29,6 +29,7 @@ import android.support.v4.view.accessibility.AccessibilityNodeInfoCompat;
 import android.support.v4.view.accessibility.AccessibilityRecordCompat;
 import android.support.v4.widget.EdgeEffectCompat;
 import android.support.v4.widget.ScrollerCompat;
+import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.util.TypedValue;
@@ -45,6 +46,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.FrameLayout;
 import android.widget.ScrollView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -1607,6 +1609,12 @@ public class NestedScrollView extends FrameLayout implements NestedScrollingPare
     @Override
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
         super.onLayout(changed, l, t, r, b);
+        if(firstInitSize){
+            setNestedScrollViewHeight();
+//            setCurrentSwapLine(scrollingChildList.get(0).getTop());
+            firstInitSize = false;
+        }
+
         mIsLayoutDirty = false;
         // Give a child focus if it needs it
         if (mChildToScrollTo != null && isViewDescendantOf(mChildToScrollTo, this)) {
@@ -1829,6 +1837,58 @@ public class NestedScrollView extends FrameLayout implements NestedScrollingPare
         NestedScrollView.SavedState ss = new NestedScrollView.SavedState(superState);
         ss.scrollPosition = getScrollY();
         return ss;
+    }
+
+    private List<View> scrollingChildList;
+    private boolean firstInitSize = true;
+
+    @Override
+    protected void onFinishInflate() {
+        super.onFinishInflate();
+        analyNestedScrollingChildViews();
+    }
+
+
+    /**
+     * nestedScrollingChild 只能嵌套在rootChild的第一层 <p>
+     * 获取 implements nestedScrollingChild view list
+     */
+    private void analyNestedScrollingChildViews(){
+        View rootChild = getChildAt(0);
+        if(rootChild == null || !(rootChild instanceof ViewGroup)){
+            throw new IllegalArgumentException("EmbeddedScrollView root child illegal");
+        }
+        scrollingChildList = new ArrayList<>();
+        ViewGroup root = (ViewGroup) rootChild;
+        for(int i = 0 ; i < root.getChildCount(); i++){
+            View child = root.getChildAt(i);
+            if(child instanceof NestedScrollingChild){
+                scrollingChildList.add(child);
+            }
+        }
+//        setupChildScrollDismissBehavior();
+    }
+
+    /**
+     * 如果 scrollingChildList 中的 view 没有设定具体高度,默认设置成 EmbeddedScrollView 的高度
+     */
+    private void setNestedScrollViewHeight(){
+
+        for(View view : scrollingChildList){
+            ViewGroup.LayoutParams params = view.getLayoutParams();
+            if(params.height == ViewGroup.LayoutParams.MATCH_PARENT || params.height == ViewGroup.LayoutParams.WRAP_CONTENT || params.height == ViewGroup.LayoutParams.FILL_PARENT){
+                int scrollViewH = getMeasuredHeight();
+                params.height = scrollViewH;
+                if (view instanceof NestedWebView) {
+                    params.height = ((NestedWebView)view).computeVerticalScrollRange();
+                    Log.i(TAG, "NestedWebView setNestedScrollViewHeight = " + scrollViewH + "  view = " + view);
+                } else if (view instanceof RecyclerView) {
+                    params.height = ((RecyclerView)view).computeVerticalScrollRange();
+                    Log.i(TAG, "RecyclerView setNestedScrollViewHeight = " + scrollViewH + "  view = " + view);
+                }
+                view.setLayoutParams(params);
+            }
+        }
     }
 
     static class SavedState extends BaseSavedState {
