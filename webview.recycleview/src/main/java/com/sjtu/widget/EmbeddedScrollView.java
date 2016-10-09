@@ -6,6 +6,7 @@ import android.support.v4.view.NestedScrollingChildHelper;
 import android.support.v4.view.NestedScrollingParent;
 import android.support.v4.view.NestedScrollingParentHelper;
 import android.support.v4.view.ViewCompat;
+import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.util.TypedValue;
@@ -248,9 +249,14 @@ public class EmbeddedScrollView extends ScrollView implements NestedScrollingPar
         super.onLayout(changed, l, t, r, b);
         Log.i(TAG, "onLayout : " + t + " / " + b);
         if(firstInitSize){
-            setNestedScrollViewHeight();
-            setCurrentSwapLine(scrollingChildList.get(0).getTop());
             firstInitSize = false;
+            postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    setNestedScrollViewHeight();
+                }
+            },1000);
+            setCurrentSwapLine(scrollingChildList.get(0).getTop());
         }
 
     }
@@ -267,14 +273,23 @@ public class EmbeddedScrollView extends ScrollView implements NestedScrollingPar
      * 如果 scrollingChildList 中的 view 没有设定具体高度,默认设置成 EmbeddedScrollView 的高度
      */
     private void setNestedScrollViewHeight(){
-
+        Log.i(TAG, "setNestedScrollViewHeight dddddddddd");
         for(View view : scrollingChildList){
             ViewGroup.LayoutParams params = view.getLayoutParams();
-            if(params.height == ViewGroup.LayoutParams.MATCH_PARENT || params.height == ViewGroup.LayoutParams.WRAP_CONTENT || params.height == ViewGroup.LayoutParams.FILL_PARENT){
-                int scrollViewH = getMeasuredHeight();
-                params.height = scrollViewH;
-                view.setLayoutParams(params);
-                Log.i(TAG, "setNestedScrollViewHeight = " + scrollViewH + "  view = " + view);
+            if(true || params.height == ViewGroup.LayoutParams.MATCH_PARENT || params.height == ViewGroup.LayoutParams.WRAP_CONTENT || params.height == ViewGroup.LayoutParams.FILL_PARENT){
+                if (view instanceof NestedWebView) {
+                    params.height = ((NestedWebView)view).getMeasuredHeight();
+                    if (params.height == 0) {
+                        firstInitSize = true;
+                    } else {
+                        view.setLayoutParams(params);
+                    }
+                    Log.i(TAG, "NestedWebView dddddddddd params.height = " +  params.height);
+                } else if (view instanceof RecyclerView) {
+                    params.height = ((RecyclerView)view).computeVerticalScrollRange();
+                    Log.i(TAG, "RecyclerView dddddddddd params.height = " +  params.height);
+                    view.setLayoutParams(params);
+                }
             }
         }
     }

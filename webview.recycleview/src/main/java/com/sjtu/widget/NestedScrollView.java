@@ -796,6 +796,7 @@ public class NestedScrollView extends FrameLayout implements NestedScrollingPare
 
                     final int scrolledDeltaY = getScrollY() - oldY;
                     final int unconsumedY = deltaY - scrolledDeltaY;
+                    Log.d(TAG,"onTouchEvent scroll off set:" + mScrollOffset[0] + "," + mScrollOffset[1] + ", scrolledDeltaY:" + scrolledDeltaY + ", unconsumedY:" + unconsumedY);
                     if (dispatchNestedScroll(0, scrolledDeltaY, 0, unconsumedY, mScrollOffset)) {
                         mLastMotionY -= mScrollOffset[1];
                         vtev.offsetLocation(0, mScrollOffset[1]);
@@ -1612,7 +1613,12 @@ public class NestedScrollView extends FrameLayout implements NestedScrollingPare
         Log.d(TAG,"onLayout dddddddddd");
         if(firstInitSize){
             firstInitSize = false;
-            setNestedScrollViewHeight();
+            postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    setNestedScrollViewHeight();
+                }
+            },1000);
         }
 
         mIsLayoutDirty = false;
@@ -1866,7 +1872,6 @@ public class NestedScrollView extends FrameLayout implements NestedScrollingPare
                 scrollingChildList.add(child);
             }
         }
-//        setupChildScrollDismissBehavior();
     }
 
     /**
